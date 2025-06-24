@@ -25,6 +25,7 @@ if uploaded_files:
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
         for file in uploaded_files:
 
+            st.audio(file, format="audio/mp3")
             # 一時ファイルとして保存
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 tmp.write(file.read())
@@ -32,7 +33,6 @@ if uploaded_files:
 
             st.write(f"ファイル名: {file.name}")
             st.write(f"ファイルサイズ: {file.size / 1024:.2f} KB")
-            st.audio(file, format="audio/mp3")
 
             # 書き起こし処理
             status = st.info("文字起こし中です...")
