@@ -36,18 +36,23 @@ if uploaded_files:
 
             # 書き起こし処理
             status = st.info("文字起こし中です...")
-            result = model.transcribe(tmp_path)
-            status.empty()
-            st.success("書き起こし完了！")
+            try:
+                result = model.transcribe(tmp_path)
+                status.empty()
+                st.success("書き起こし完了！")
+    
+                # 編集可能なテキストエリア
+                default_text = result["text"].replace("クラシャ", "コラショ")
+                edited_text = st.text_input(label=f"音声テキスト - {file.name}", value=f"{default_text}")
+    
+                # テキストを ZIP に追加
+                text_filename = file.name.rsplit(".", 1)[0] + ".txt"
+                zip_file.writestr(text_filename, edited_text)
 
-            # 編集可能なテキストエリア
-            default_text = result["text"].replace("クラシャ", "コラショ")
-            edited_text = st.text_input(label=f"音声テキスト - {file.name}", value=f"{default_text}")
-
-            # テキストを ZIP に追加
-            text_filename = file.name.rsplit(".", 1)[0] + ".txt"
-            zip_file.writestr(text_filename, edited_text)
-
+            except:
+                status.empty()
+                st.warning(f"音声化に失敗しました。ファイルが壊れていないかご確認ください。 - {file.name}")
+            
             st.markdown("---")
 
     # ZIP ダウンロードボタン（処理後）
