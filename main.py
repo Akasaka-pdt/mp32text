@@ -57,7 +57,7 @@ if uploaded_files:
 
         st.download_button(
             label="📄 書き起こし結果を CSV でダウンロード",
-            data=csv_data,
+            data=csv_data.encode("utf-8-sig"),
             file_name="transcriptions.csv",
             mime="text/csv"
         )
