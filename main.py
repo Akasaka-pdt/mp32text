@@ -21,12 +21,11 @@ import pandas as pd
 # [server]
 # enableXsrfProtection = true
 # enableCORS = false
-# maxUploadSize = 50
 # [browser]
 # gatherUsageStats = false
 
 ALLOWED_EXT = {".mp3"}          # 必要なら .wav などを追加
-MAX_MB_EACH = 50                # 個別ファイル上限（MB）
+MAX_MB_EACH = 200                # 個別ファイル上限（MB）
 ALLOWED_MIME = {"audio/mpeg"}   # ブラウザが付けるMIME（参考）
 
 @st.cache_resource
@@ -160,3 +159,4 @@ if uploaded_files:
             gc.collect()
 else:
     st.info("サイドバーから音声ファイル（mp3）をアップロードしてください。")
+
