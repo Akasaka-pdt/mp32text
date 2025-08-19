@@ -35,7 +35,7 @@ def load_model():
 
 model = load_model()
 
-st.title("🎤 Whisper 音声書き起こしアプリ（堅牢版）")
+st.title("🎤 Whisper 音声書き起こしアプリ")
 
 uploaded_files = st.sidebar.file_uploader(
     "音声ファイルをアップロードしてください（mp3）",
@@ -159,4 +159,5 @@ if uploaded_files:
             gc.collect()
 else:
     st.info("サイドバーから音声ファイル（mp3）をアップロードしてください。")
+
 
